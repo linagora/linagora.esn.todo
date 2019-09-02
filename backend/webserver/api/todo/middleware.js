@@ -1,10 +1,24 @@
 module.exports = (dependencies, lib) => {
   return {
-    canGet
+    canList,
+    canCreate,
+    canUpdate,
+    canRemove
   };
 
-  // arguments: req, res, next
-  function canGet(req, res, next) {
+  function canList(req, res, next) {
+    next();
+  }
+
+  function canCreate(req, res, next) {
+    next();
+  }
+
+  function canUpdate(req, res, next) {
+    next();
+  }
+
+  function canRemove(req, res, next) {
     next();
   }
 };
