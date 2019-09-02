@@ -1,7 +1,4 @@
-'use strict';
-
-// arguments: dependencies, lib
-module.exports = function() {
+module.exports = (dependencies, lib) => {
   return {
     get
   };
