@@ -13,7 +13,7 @@ module.exports = function(dependencies, lib, router, moduleName) {
 
   router.put('/todos', middleware.canCreate, controller.create);
 
-  router.patch('/todos/:id', middleware.canUpdate, controller.update);
+  router.patch('/todos/:id', middleware.loadTodo, middleware.canUpdate, controller.update);
 
-  router.delete('/todos/:id', middleware.canRemove, controller.remove);
+  router.delete('/todos/:id', middleware.loadTodo, middleware.canRemove, controller.remove);
 };

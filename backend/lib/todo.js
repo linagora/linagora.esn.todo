@@ -5,11 +5,16 @@ module.exports = dependencies => {
   const TodoModel = mongoose.model('Todo');
 
   return {
+    getTodoForUser,
     list,
     create,
     update,
     remove
   };
+
+  function getTodoForUser(todoId, userId) {
+    return TodoModel.findOne({ _id: todoId, creator: userId }).exec();
+  }
 
   function list(options = {}) {
     const query = {};
