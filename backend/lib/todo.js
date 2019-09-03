@@ -40,12 +40,21 @@ module.exports = dependencies => {
   }
 
   function update(todoId, todo = {}) {
-    if (!todo.title) {
-      return Promise.reject(new Error('title is required'));
+    const query = { $set: {} };
+
+    if (todo.title) {
+      query.$set.title = todo.title;
     }
 
-    return DashboardModel.findByIdAndUpdate(todoId, { $set: { title: todo.title } }, { new: true })
-      .exec()
+    if (todo.status) {
+      query.$set.status = todo.status;
+    }
+
+    if (Object.keys(query.$set).length === 0) {
+      return Promise.reject(new Error('Bad update query'));
+    }
+
+    return DashboardModel.findByIdAndUpdate(todoId, query, { new: true }).exec()
   }
 
   function remove(todoId) {

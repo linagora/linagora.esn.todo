@@ -29,6 +29,14 @@ module.exports = dependencies => {
   function update(req, res) {
     const update = {};
 
+    if (req.body.title) {
+      update.title = req.body.title;
+    }
+
+    if (req.body.status) {
+      update.status = req.body.status;
+    }
+
     todoModule.update(req.params.id, update)
       .then(updated => res.status(200).json(updated))
       .catch(err => {
