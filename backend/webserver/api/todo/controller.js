@@ -1,4 +1,4 @@
-module.exports = (dependencies, lib) => {
+module.exports = dependencies => {
   const todoModule = require('../../../lib/todo')(dependencies);
 
   return {
@@ -9,22 +9,18 @@ module.exports = (dependencies, lib) => {
   };
 
   function list(req, res) {
-    todoModule.list()
-      .then(todos => {
-        res.status(200).json(todos || []);
-      })
+    todoModule.list({ creator: req.user._id })
+      .then(todos => res.status(200).json(todos || []))
       .catch(err => {
         res.status(500).send();
       });
   }
 
   function create(req, res) {
-    const todo = {};
+    const todo = {...req.body, creator: req.user._id };
 
     todoModule.create(todo)
-      .then(created => {
-        res.status(201).json(created);
-      })
+      .then(created => res.status(201).json(created))
       .catch(err => {
         res.status(500).send();
       });
@@ -34,21 +30,15 @@ module.exports = (dependencies, lib) => {
     const update = {};
 
     todoModule.update(req.params.id, update)
-      .then(updated => {
-        res.status(200).json(updated);
-      })
+      .then(updated => res.status(200).json(updated))
       .catch(err => {
         res.status(500).send();
       });
     }
 
   function remove(req, res) {
-    const update = {};
-
     todoModule.remove(req.params.id)
-      .then(() => {
-        res.status(204).send();
-      })
+      .then(() => res.status(204).send())
       .catch(err => {
         res.status(500).send();
       });
