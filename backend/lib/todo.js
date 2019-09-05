@@ -27,7 +27,7 @@ module.exports = dependencies => {
       .find(query)
       .skip(+options.offset || DEFAULT_OFFSET)
       .limit(+options.limit || DEFAULT_LIMIT)
-      .sort({ 'created_at': 1 })
+      .sort({ created_at: 1 })
       .exec();
   }
 
@@ -36,7 +36,7 @@ module.exports = dependencies => {
       return Promise.reject(new Error('todo is required'));
     }
 
-    return new TodoModel(todo).save()
+    return new TodoModel(todo).save();
   }
 
   function update(todoId, todo = {}) {
@@ -54,7 +54,7 @@ module.exports = dependencies => {
       return Promise.reject(new Error('Bad update query'));
     }
 
-    return DashboardModel.findByIdAndUpdate(todoId, query, { new: true }).exec()
+    return TodoModel.findByIdAndUpdate(todoId, query, { new: true }).exec();
   }
 
   function remove(todoId) {
@@ -62,6 +62,6 @@ module.exports = dependencies => {
       return Promise.reject(new Error('todoId is required'));
     }
 
-    return DashboardModel.findByIdAndRemove(todoId).exec();
+    return TodoModel.findByIdAndRemove(todoId).exec();
   }
-}
+};
