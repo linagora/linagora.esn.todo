@@ -36,7 +36,7 @@ const awesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
       const webserverWrapper = dependencies('webserver-wrapper');
 
-      webserverWrapper.addApp(AWESOME_MODULE_NAME, app)
+      webserverWrapper.addApp(AWESOME_MODULE_NAME, app);
 
       return callback();
     }

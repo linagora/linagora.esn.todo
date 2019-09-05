@@ -1,5 +1,6 @@
 module.exports = (dependencies, lib) => {
   const todoModule = require('../../../lib/todo')(dependencies);
+  const logger = dependencies('logger');
 
   return {
     loadTodo,
